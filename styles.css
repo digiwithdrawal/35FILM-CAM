@@ -1,1 +1,224 @@
+/* styles.css */
+:root{
+  --fg:rgba(255,255,255,.92);
+  --mut:rgba(255,255,255,.62);
+  --stroke: rgba(255,255,255,.12);
+  --panel: rgba(18,18,22,.30);
+  --btn: rgba(140,140,150,.12);
+  --btn2: rgba(140,140,150,.18);
+  --safe-top: env(safe-area-inset-top);
+  --safe-bot: env(safe-area-inset-bottom);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  background:#000;
+  color:var(--fg);
+  overflow:hidden;
+  min-height:100svh;
+  min-height:100dvh;
+  font-family: ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+.app{
+  position:fixed; inset:0;
+  width:100vw; height:100svh; height:100dvh;
+  overflow:hidden;
+}
+
+.hidden{ display:none; }
+
+canvas{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  background:#000;
+}
+
+.top{
+  position:absolute; left:0; right:0; top:0;
+  padding: calc(10px + var(--safe-top)) 12px 10px 12px;
+  display:flex; justify-content:space-between; align-items:center;
+  z-index:10;
+  background: linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,0));
+}
+
+.brand{display:flex; align-items:center; gap:10px}
+.dot{
+  width:10px; height:10px; border-radius:3px;
+  background:#fff; opacity:.9;
+  box-shadow:0 0 14px rgba(255,255,255,.25);
+}
+.t1{font-weight:900; letter-spacing:.18em; font-size:13px}
+.t2{font-size:10px; letter-spacing:.18em; color:var(--mut)}
+
+.topRight{display:flex; gap:10px; align-items:center}
+
+.pillSelect, .pillBtn{
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.18);
+  color:var(--fg);
+  border-radius:999px;
+  padding:10px 12px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.pillBtn:active{transform: translateY(1px)}
+
+.hud{
+  position:absolute;
+  left:12px; right:12px;
+  bottom: calc(12px + var(--safe-bot));
+  z-index:10;
+  border-radius: 18px;
+  border:1px solid var(--stroke);
+  padding: 12px;
+  background: var(--panel);
+}
+@supports ((-webkit-backdrop-filter: blur(14px)) or (backdrop-filter: blur(14px))){
+  .hud{-webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);}
+}
+
+.row{display:flex; gap:10px; align-items:center; margin-bottom:10px}
+.row:last-child{margin-bottom:0}
+
+.btn{
+  border:1px solid rgba(255,255,255,.14);
+  background: var(--btn);
+  color:var(--fg);
+  padding: 12px 12px;
+  border-radius: 16px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  flex:1;
+}
+.btn.primary{background: var(--btn2);}
+.btn.glass{background: rgba(0,0,0,.16)}
+.btn:active{transform: translateY(1px)}
+
+.snap{
+  font-size:14px;
+  letter-spacing:.22em;
+}
+
+.tip{
+  margin-top:10px;
+  font-size:11px;
+  color:rgba(255,255,255,.6);
+  letter-spacing:.08em;
+}
+
+/* Modal */
+.modal{
+  position:absolute; inset:0;
+  background: rgba(0,0,0,.55);
+  z-index:20;
+  display:flex;
+  align-items:flex-end;
+}
+.modal.hidden{display:none}
+
+.sheet{
+  width:100%;
+  max-height: 78vh;
+  background: rgba(10,10,12,.88);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  border:1px solid rgba(255,255,255,.12);
+  padding: 12px;
+  overflow:auto;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.sheetTop{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:10px;
+}
+.sheetTitle{
+  font-weight:900;
+  letter-spacing:.18em;
+  font-size:13px;
+  text-transform:uppercase;
+}
+.closeBtn{flex:0 0 auto; padding:10px 12px; border-radius:999px}
+
+.filmList details{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin-bottom:10px;
+  background: rgba(0,0,0,.14);
+}
+.filmList summary{
+  cursor:pointer;
+  list-style:none;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.filmList summary::-webkit-details-marker{display:none}
+
+.filmBtns{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:10px;
+}
+.filmPick{
+  text-align:left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(140,140,150,.10);
+  color: rgba(255,255,255,.9);
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.filmPick small{
+  display:block;
+  margin-top:4px;
+  color: rgba(255,255,255,.6);
+  font-weight:700;
+  letter-spacing:.06em;
+}
+
+/* Screen flash fallback */
+.screenFlash{
+  position:absolute;
+  inset:0;
+  background:#fff;
+  z-index:50;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 90ms linear;
+}
+.screenFlash.on{ opacity:1; }
+
+/* HUD hidden: only SNAP stays */
+.hudOnlySnap #topBar{ display:none; }
+.hudOnlySnap #hud{
+  background: transparent;
+  border: none;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  padding: 0;
+}
+.hudOnlySnap #hud .row,
+.hudOnlySnap #hud .tip{
+  display:none;
+}
+.hudOnlySnap #hud .row:last-child{
+  display:flex; /* SNAP row */
+}
+.hudOnlySnap #hud{
+  left: 12px; right: 12px;
+  bottom: calc(14px + var(--safe-bot));
+}
 
