@@ -1,1 +1,94 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"
+  />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>FilmRoll Cam</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <video id="video" playsinline muted autoplay class="hidden"></video>
+    <canvas id="view"></canvas>
+
+    <!-- Screen flash fallback -->
+    <div id="screenFlash" class="screenFlash hidden"></div>
+
+    <header id="topBar" class="top">
+      <div class="brand">
+        <div class="dot"></div>
+        <div class="txt">
+          <div class="t1">FILMROLL CAM</div>
+          <div class="t2">35MM PRESETS • LIVE VIEW</div>
+        </div>
+      </div>
+
+      <div class="topRight">
+        <select id="ratio" class="pillSelect" title="Ratio">
+          <option value="auto" selected>AUTO</option>
+          <option value="portrait">PORTRAIT</option>
+          <option value="landscape">LANDSCAPE 16:9</option>
+          <option value="square">SQUARE 1:1</option>
+        </select>
+
+        <button id="flashBtn" class="pillBtn" type="button">FLASH: OFF</button>
+      </div>
+    </header>
+
+    <section id="hud" class="hud">
+      <div class="row">
+        <button id="openFilm" class="btn glass" type="button">
+          FILM: <span id="filmName">Kodak Portra 400</span>
+        </button>
+        <button id="randomFilm" class="btn glass" type="button">RANDOM</button>
+      </div>
+
+      <div class="row">
+        <button id="openScan" class="btn glass" type="button">
+          SCAN: <span id="scanName">AUTO</span>
+        </button>
+        <button id="hideHud" class="btn glass" type="button">HIDE</button>
+      </div>
+
+      <div class="row">
+        <button id="snap" class="btn primary snap" type="button">SNAP</button>
+      </div>
+
+      <div class="tip" id="tip">
+        Tip: Long-press SNAP to hide/show HUD (SNAP stays visible).
+      </div>
+    </section>
+
+    <!-- Film Picker Modal -->
+    <div id="filmModal" class="modal hidden" aria-hidden="true">
+      <div class="sheet">
+        <div class="sheetTop">
+          <div class="sheetTitle">Choose Film Roll</div>
+          <button id="closeFilm" class="btn closeBtn" type="button">CLOSE</button>
+        </div>
+        <div id="filmList" class="filmList"></div>
+      </div>
+    </div>
+
+    <!-- Scan Picker Modal -->
+    <div id="scanModal" class="modal hidden" aria-hidden="true">
+      <div class="sheet">
+        <div class="sheetTop">
+          <div class="sheetTitle">Choose Scan</div>
+          <button id="closeScan" class="btn closeBtn" type="button">CLOSE</button>
+        </div>
+        <div class="filmBtns" id="scanList"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
 
